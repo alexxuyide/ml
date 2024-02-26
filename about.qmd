@@ -16,4 +16,4 @@ about:
 
 ---
 
-About this blog
+I am Yide (Alex) Xu, a Geography and Mathematics double major from Middlebury College. On this webpage I post most of the classwork for CSCI 0451 Machine Learning and some machine learning works. 
