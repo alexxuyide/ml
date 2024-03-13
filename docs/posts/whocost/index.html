@@ -6,6 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Yide (Alex) Xu">
+<meta name="dcterms.date" content="2024-02-19">
+<meta name="description" content="The first post for CSCI 0451 Machine Learning">
 
 <title>My Awesome CSCI 0451 Blog - ‘Optimal’ Decision-Making</title>
 <style>
@@ -198,13 +201,30 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">‘Optimal’ Decision-Making</h1>
-                      </div>
+                  <div>
+        <div class="description">
+          The first post for CSCI 0451 Machine Learning
+        </div>
+      </div>
+                </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Yide (Alex) Xu </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 19, 2024</p>
+      </div>
+    </div>
     
       
     </div>
@@ -230,7 +250,7 @@ window.Quarto = {
 <section id="part-a-grab-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="part-a-grab-the-data">Part A: Grab the Data</h3>
 <p>First, we want to download the training data.</p>
-<div id="cell-4" class="cell" data-execution_count="254">
+<div id="cell-5" class="cell" data-execution_count="254">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -369,7 +389,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="part-b-explore-the-data">Part B: Explore the Data</h3>
 <p>From this data, I first want to know how does different loan intent vary with age? People within different age range may have different needs for money. I would like to see how the data set says about how different age group would have different purpose in borrowing money from the bank.</p>
 <p>Fist, I would classify each individual in the data set into different age range.</p>
-<div id="cell-9" class="cell" data-execution_count="256">
+<div id="cell-10" class="cell" data-execution_count="256">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>age_ranges <span class="op">=</span> [(<span class="dv">10</span>, <span class="dv">20</span>), (<span class="dv">20</span>, <span class="dv">30</span>), (<span class="dv">30</span>, <span class="dv">40</span>), (<span class="dv">40</span>, <span class="dv">50</span>), (<span class="dv">50</span>, <span class="dv">60</span>), (<span class="dv">60</span>, <span class="dv">70</span>), (<span class="dv">70</span>, <span class="dv">80</span>)]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> assign_age_range(age):</span>
@@ -491,7 +511,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="cell-10" class="cell" data-execution_count="257">
+<div id="cell-11" class="cell" data-execution_count="257">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>age_intent <span class="op">=</span> df_train.groupby([<span class="st">"Age_Range"</span>, <span class="st">'loan_intent'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -512,7 +532,7 @@ window.Quarto = {
 </div>
 <p>The number of individuals within 20 to 30 years old who are seeking loans is significantly higher than all other age groups. There are smaller proportion of this age group population that are seeking home improvement loans comparing to other loan intentions. As the age increases, there are less incident of people looking for loan from the bank.</p>
 <p>Next, I want to see how interest rates are set given people with different income level. Also, how does an individual’s credit history affect the interest rate.</p>
-<div id="cell-13" class="cell" data-execution_count="258">
+<div id="cell-14" class="cell" data-execution_count="258">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_train[<span class="st">'person_emp_length'</span>].fillna(<span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> df_train[df_train[<span class="st">'person_emp_length'</span>] <span class="op">&lt;=</span> <span class="dv">50</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> df_train[df_train[<span class="st">'person_income'</span>] <span class="op">&lt;=</span> <span class="dv">3000000</span>]</span>
@@ -533,7 +553,7 @@ window.Quarto = {
 </div>
 </div>
 <p>It is apparent that people who have defaulted before receive higher interest rates. In fact, almost all of the individuals who have defaulted before will have an interest rate that is higher than 12.5 percent. In terms of interest rates’ relation with income, people with higher income usually receive lower interest rate. Last but not least, I want to see how interest rate is affected by other variables, namely age, home ownership, and loan intention.</p>
-<div id="cell-15" class="cell" data-execution_count="259">
+<div id="cell-16" class="cell" data-execution_count="259">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">411</span>)</span>
@@ -569,7 +589,7 @@ window.Quarto = {
 <section id="build-a-model" class="level3">
 <h3 class="anchored" data-anchor-id="build-a-model">Build a Model</h3>
 <p>Before we dive into building a model, we want to prepare the data for training. We first seperate our target variable from the training data and create dummy variables.</p>
-<div id="cell-19" class="cell" data-execution_count="260">
+<div id="cell-20" class="cell" data-execution_count="260">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
@@ -866,7 +886,7 @@ window.Quarto = {
 </div>
 </div>
 <p>I would like to fit a Logistic Regression model as the score-based machine learning model to the data. First, I want to select my features. According to my exploration, I found that people who have defaulted their previous loan(s) are more likely to have higher interest rate, which could lead to higher risk of defaulting on a new loan. Therefore, I include both the default history and the loan interest rate as the features to predict loan defaulting. Next, I include <code>loan_percent_income</code> because it reflects the ability for an individual to pay the interest using its source of income. Lastly, I include the individual’s home ownerhsip status as a factor because unstable shelter status could deprecate one’s ability to pay back the loan.</p>
-<div id="cell-21" class="cell" data-execution_count="261">
+<div id="cell-22" class="cell" data-execution_count="261">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> LogisticRegression()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>quant <span class="op">=</span> [<span class="st">"loan_percent_income"</span>, <span class="st">"loan_int_rate"</span>]</span>
@@ -881,7 +901,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Here we have the weight vector <span class="math inline">\(\mathbf{w}\)</span></p>
-<div id="cell-23" class="cell" data-execution_count="262">
+<div id="cell-24" class="cell" data-execution_count="262">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>LR.coef_[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="262">
 <pre><code>array([ 8.55153096,  0.27487555, -0.04240708,  0.29801174, -1.11860094,
@@ -891,14 +911,14 @@ window.Quarto = {
 </section>
 <section id="part-d-find-a-threshold" class="level3">
 <h3 class="anchored" data-anchor-id="part-d-find-a-threshold">Part D: Find a Threshold</h3>
-<div id="cell-25" class="cell" data-execution_count="263">
+<div id="cell-26" class="cell" data-execution_count="263">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> score_function(coef, cols, df):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> np.dot(df[cols].values, coef[<span class="dv">0</span>])</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scores</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>X_train[<span class="st">'new_score'</span>] <span class="op">=</span> score_function(LR.coef_, selected_columns, X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="264">
+<div id="cell-27" class="cell" data-execution_count="264">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>best_profit <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>best_t <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X_train[<span class="st">"real_default"</span>] <span class="op">=</span> y_train</span>
@@ -1012,7 +1032,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="265">
+<div id="cell-28" class="cell" data-execution_count="265">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.plot(profit_frame[<span class="st">'threshold'</span>], profit_frame[<span class="st">'profit'</span>])</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1031,7 +1051,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 <p>From this diagram, we can see that the profit peaks when we set the threshold to be around 6. In fact, my code has determined that the when we set the threshold to be 6.55, the best profit can be reached. At <span class="math inline">\(t = 6.55\)</span>, the profit per borrower is</p>
-<div id="cell-29" class="cell" data-execution_count="266">
+<div id="cell-30" class="cell" data-execution_count="266">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>best_profit<span class="op">/</span><span class="bu">len</span>(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="266">
 <pre><code>1387.0591712036908</code></pre>
@@ -1040,7 +1060,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </section>
 <section id="evaluate-your-model-from-the-banks-perspective" class="level3">
 <h3 class="anchored" data-anchor-id="evaluate-your-model-from-the-banks-perspective">Evaluate Your Model from the Bank’s Perspective</h3>
-<div id="cell-31" class="cell" data-execution_count="267">
+<div id="cell-32" class="cell" data-execution_count="267">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/PhilChodrow/ml-notes/main/data/credit-risk/test.csv"</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(url)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df_test.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -1242,7 +1262,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-32" class="cell" data-execution_count="268">
+<div id="cell-33" class="cell" data-execution_count="268">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_test_forModel <span class="op">=</span> pd.get_dummies(df_test)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df_test_forModel <span class="op">=</span> df_test_forModel[selected_columns]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1251,7 +1271,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'new_score'</span>] <span class="op">=</span> score_function(LR.coef_, selected_columns, df_test_forModel)</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'predicted_loan_status'</span>] <span class="op">=</span> df_test[<span class="st">'new_score'</span>] <span class="op">&gt;=</span> t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-33" class="cell" data-execution_count="269">
+<div id="cell-34" class="cell" data-execution_count="269">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>TrueNegative <span class="op">=</span> df_test[(df_test[<span class="st">'predicted_loan_status'</span>] <span class="op">==</span> <span class="va">False</span>) <span class="op">&amp;</span> (df_test[<span class="st">'loan_status'</span>] <span class="op">==</span> <span class="dv">0</span>)]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>TrueNegative_list <span class="op">=</span> TrueNegative[<span class="st">"loan_amnt"</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.25</span> <span class="op">*</span> TrueNegative[<span class="st">"loan_int_rate"</span>]<span class="op">/</span><span class="dv">100</span>)<span class="op">**</span><span class="dv">10</span> <span class="op">-</span> TrueNegative[<span class="st">"loan_amnt"</span>]</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>TrueNegative_gain <span class="op">=</span> TrueNegative_list.<span class="bu">sum</span>()</span>
@@ -1269,7 +1289,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 <section id="evaluate-your-model-from-the-borrowers-perspective" class="level3">
 <h3 class="anchored" data-anchor-id="evaluate-your-model-from-the-borrowers-perspective">Evaluate Your Model From the Borrower’s Perspective</h3>
 <p>Is it more difficulty for people in certain age groups to access credit under my proposed system? Let’s see the result.</p>
-<div id="cell-36" class="cell" data-execution_count="271">
+<div id="cell-37" class="cell" data-execution_count="271">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'Age_Range'</span>] <span class="op">=</span> df_test[<span class="st">'person_age'</span>].<span class="bu">apply</span>(assign_age_range)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_test.groupby([<span class="st">"Age_Range"</span>,<span class="st">"predicted_loan_status"</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="271">
@@ -1360,7 +1380,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-37" class="cell" data-execution_count="284">
+<div id="cell-38" class="cell" data-execution_count="284">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_test.groupby(<span class="st">"Age_Range"</span>)[<span class="st">"predicted_loan_status"</span>].agg(<span class="kw">lambda</span> x: (x <span class="op">==</span> <span class="va">True</span>).mean() <span class="op">*</span> <span class="dv">100</span>).reset_index() <span class="co"># adopted from ChatGPT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="284">
 <div>
@@ -1414,7 +1434,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 <p>Although 50 percent of people are predicted to be defaulted for the age 50 to 60 group, the number of sample in this group is very small (only 4 person). Other than the 50 to 60 range, it is more difficult for people with age between 20 to 30 to access their credit. As the age range increases, the probability that my model would grant credit to each individual increases. Now, we want to see how different loan intents may affect how my model would be more likely or less likely to give them grants.</p>
-<div id="cell-39" class="cell" data-execution_count="274">
+<div id="cell-40" class="cell" data-execution_count="274">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_test.groupby([<span class="st">"loan_intent"</span>,<span class="st">"predicted_loan_status"</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="274">
 <div>
@@ -1510,7 +1530,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-40" class="cell" data-execution_count="281">
+<div id="cell-41" class="cell" data-execution_count="281">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_test.groupby(<span class="st">"loan_intent"</span>)[<span class="st">"predicted_loan_status"</span>].agg(<span class="kw">lambda</span> x: (x <span class="op">==</span> <span class="va">True</span>).mean() <span class="op">*</span> <span class="dv">100</span>).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="281">
 <div>
@@ -1564,7 +1584,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 <p>According to the prediction of my model, the probability for a loan to be defaulted across different loaning intent is similar. Home imporvement loans see a slightly lower probability of defaulting. Next, we want to see what is is the count of default for loans with different intents in reality.</p>
-<div id="cell-42" class="cell" data-execution_count="280">
+<div id="cell-43" class="cell" data-execution_count="280">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_test.groupby([<span class="st">"loan_intent"</span>,<span class="st">"loan_status"</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="280">
 <div>
@@ -1660,7 +1680,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-43" class="cell" data-execution_count="283">
+<div id="cell-44" class="cell" data-execution_count="283">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_test.groupby(<span class="st">"loan_intent"</span>)[<span class="st">"loan_status"</span>].agg(<span class="kw">lambda</span> x: (x <span class="op">==</span> <span class="dv">1</span>).mean() <span class="op">*</span> <span class="dv">100</span>).reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="283">
 <div>
@@ -1714,7 +1734,7 @@ is obtained when the threshold is 6.554722944025221</code></pre>
 </div>
 </div>
 <p>Loans borrowed for debt consolidation and medical purposes in reality have higher probability of defaulting. On the other hand, loans borrowed fro education and venture purposes have lower probability of defaulting. Next, I will use a graph to show whether the income level and the interest rate impact the ease with which an individual can access credit under my decision system.</p>
-<div id="cell-45" class="cell" data-execution_count="286">
+<div id="cell-46" class="cell" data-execution_count="286">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df_test, x<span class="op">=</span><span class="st">'person_income'</span>, y<span class="op">=</span><span class="st">'loan_int_rate'</span>, hue<span class="op">=</span> <span class="st">'predicted_loan_status'</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Interest Rate vs. Income by Prediction on Loan Status"</span>)</span>
