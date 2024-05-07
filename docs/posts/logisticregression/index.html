@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2024-04-04">
-<meta name="description" content="In this blog post, you’ll implement several first-order methods: optimization algorithms based on the gradients of functions. You’ll implement simple gradient descent, a momentum method, and stochastic gradient descent, comparing their performance for training logistic regression.">
+<meta name="description" content="In this blog post, I implement several optimization algorithms based on the gradients of functions.">
 
 <title>My Awesome CSCI 0451 Blog - Implementing Logistic Regression</title>
 <style>
@@ -199,7 +199,7 @@ window.Quarto = {
       <h1 class="title">Implementing Logistic Regression</h1>
                   <div>
         <div class="description">
-          <p>In this blog post, you’ll implement several <i>first-order methods</i>: optimization algorithms based on the gradients of functions. You’ll implement simple gradient descent, a momentum method, and stochastic gradient descent, comparing their performance for training logistic regression.</p>
+          <p>In this blog post, I implement several optimization algorithms based on the gradients of functions.</p>
         </div>
       </div>
                 </div>
@@ -443,9 +443,7 @@ window.Quarto = {
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    opt.step(X_train, y_train, alpha <span class="op">=</span> <span class="fl">0.4</span>, beta <span class="op">=</span> <span class="fl">0.9</span>)</span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    loss_1 <span class="op">=</span> LR_1.loss(X_train, y_train).item()</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    loss_vec_ovft.append(loss_1)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>loss_vec_ovft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    loss_vec_ovft.append(loss_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>[nan,
  0.4822104871273041,
